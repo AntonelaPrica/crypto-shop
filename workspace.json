@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "projects": {
+    "api-gateway": "apps/api-gateway",
+    "cryptoshop-admin-ui": "apps/cryptoshop-admin-ui",
+    "cryptoshop-ui": "apps/cryptoshop-ui",
+    "products-service": "apps/products-service",
+    "services-shared": "libs/services-shared",
+    "ui-lib-shared": "libs/ui-lib-shared",
+    "users-service": "apps/users-service"
+  }
+}

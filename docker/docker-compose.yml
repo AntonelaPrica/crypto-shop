@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  products-db:
+    image: 'postgres'
+    environment:
+      - POSTGRES_USER=shopuser
+      - POSTGRES_PASSWORD=shoppass
+      - POSTGRES_DB=shopproducts
+    ports:
+      - "5432:5432"
+    volumes:
+      - shopproducts-db-volume:/var/lib/postgresql/data
+  users-db:
+    image: 'postgres'
+    environment:
+      - POSTGRES_USER=shopuser
+      - POSTGRES_PASSWORD=shoppass
+      - POSTGRES_DB=shopusers
+    ports:
+      - "5433:5432"
+    volumes:
+      - shopusers-db-volume:/var/lib/postgresql/data
+  rabbitmq3:
+    container_name: 'rabbitmq'
+    image: rabbitmq:3.8-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+    ports:
+      # AMQP protocol port
+      - "5672:5672"
+      # HTTP management UI
+      - "15672:15672"
+volumes:
+  shopproducts-db-volume:
+  shopusers-db-volume:

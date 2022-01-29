@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/ui-lib-shared",
+  "sourceRoot": "libs/ui-lib-shared/src",
+  "prefix": "crypto-shop",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui-lib-shared"],
+      "options": {
+        "jestConfig": "libs/ui-lib-shared/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/ui-lib-shared/src/**/*.ts",
+          "libs/ui-lib-shared/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
