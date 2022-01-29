@@ -2,11 +2,11 @@
   "version": 2,
   "projects": {
     "api-gateway": "apps/api-gateway",
-    "cryptoshop-admin-ui": "apps/cryptoshop-admin-ui",
-    "cryptoshop-ui": "apps/cryptoshop-ui",
     "products-service": "apps/products-service",
     "services-shared": "libs/services-shared",
+    "ui-admin": "apps/ui-admin",
     "ui-lib-shared": "libs/ui-lib-shared",
+    "ui-user": "apps/ui-user",
     "users-service": "apps/users-service"
   }
 }

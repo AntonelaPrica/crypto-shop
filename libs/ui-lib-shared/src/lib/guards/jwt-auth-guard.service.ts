@@ -16,7 +16,8 @@ export class JwtAuthGuard implements CanActivate {
     const hasAuth = localStorage.getItem('authorization') !== null;
     console.log(hasAuth);
     if (!hasAuth) {
-      await this.router.navigateByUrl('auth/login');
+      console.log(this.router);
+      await this.router.navigateByUrl('auth', { replaceUrl: true });
     }
     return hasAuth;
   }

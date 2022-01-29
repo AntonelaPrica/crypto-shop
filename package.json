@@ -6,6 +6,8 @@
     "start:products": "nx serve --project=products-service",
     "start:users": "nx serve --project=users-service",
     "start:gateway": "nx serve --project=api-gateway",
+    "start:ui-admin": "nx serve --project=ui-admin",
+    "start:ui-user": "nx serve --project=ui-user",
     "build": "nx build",
     "test": "nx test",
     "postinstall": "ngcc --properties es2015 browser module main"

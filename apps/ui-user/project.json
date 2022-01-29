@@ -1,0 +1,108 @@
+{
+  "projectType": "application",
+  "root": "apps/ui-user",
+  "sourceRoot": "apps/ui-user/src",
+  "prefix": "crypto-shop",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ui-user",
+        "index": "apps/ui-user/src/index.html",
+        "main": "apps/ui-user/src/main.ts",
+        "polyfills": "apps/ui-user/src/polyfills.ts",
+        "tsConfig": "apps/ui-user/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/ui-user/src/favicon.ico", "apps/ui-user/src/assets"],
+        "styles": [
+          "apps/ui-user/src/styles.scss",
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "node_modules/bootstrap/dist/css/bootstrap-grid.css",
+          "node_modules/bootstrap/dist/css/bootstrap-utilities.css"
+        ],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/ui-user/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/ui-user/src/environments/environment.ts",
+              "with": "apps/ui-user/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/ui-user/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "ui-user:build:production",
+          "proxyConfig": "apps/ui-user/src/proxy.conf.json"
+        },
+        "development": {
+          "browserTarget": "ui-user:build:development",
+          "proxyConfig": "apps/ui-user/src/proxy.conf.json"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201,
+        "publicHost": "http://localhost:4201"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "ui-user:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/ui-user/src/**/*.ts",
+          "apps/ui-user/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/ui-user"],
+      "options": {
+        "jestConfig": "apps/ui-user/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
