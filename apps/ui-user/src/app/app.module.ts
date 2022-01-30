@@ -11,12 +11,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { JwtAuthGuard } from '@crypto-shop/ui-lib-shared';
+import {
+  JwtAuthGuard,
+  JwtAuthInterceptor,
+  UiLibSharedModule,
+} from '@crypto-shop/ui-lib-shared';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent],
+  declarations: [AppComponent, HomePageComponent, PageHeaderComponent],
   imports: [
+    CommonModule,
     BrowserModule,
+    HttpClientModule,
+    UiLibSharedModule,
     RouterModule.forRoot(
       [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,7 +48,9 @@ import { JwtAuthGuard } from '@crypto-shop/ui-lib-shared';
       }
     ),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

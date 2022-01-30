@@ -37,6 +37,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   async onRegisterRedirect() {
-    await this.router.navigateByUrl('/register');
+    await this.router.navigateByUrl('/auth/register');
   }
 }

@@ -5,14 +5,16 @@ import {
   Get,
   Param,
   Post,
+  Sse,
   UseGuards,
 } from '@nestjs/common';
 
 import { ProductsGatewayService } from './products-gateway.service';
 import { ProductDTO } from '@crypto-shop/services-shared';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { interval, map, Observable } from 'rxjs';
 
-@Controller('commands')
+@Controller('products')
 export class ProductsRestController {
   constructor(private readonly productsService: ProductsGatewayService) {}
 

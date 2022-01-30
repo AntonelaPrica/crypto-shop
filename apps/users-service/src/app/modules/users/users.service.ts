@@ -39,7 +39,7 @@ export class UsersService {
   }
 
   async save(user: UserRegisterDTO): Promise<UserDTO> {
-    const oldUser = await this.userEntityRepo.findOne(user.id);
+    const oldUser = user.id ? await this.userEntityRepo.findOne(user.id) : null;
     const hashedPassword = await bcrypt.hash(user.password, 10);
     const newUser = new UserEntity(
       oldUser?.id,

@@ -30,10 +30,10 @@ export class RegisterFormComponent implements OnInit {
   async onSubmit() {
     const payload: UserRegisterDTO = this.registerForm.value;
     await this.authService.register(payload);
-    await this.router.navigateByUrl('/login');
+    await this.router.navigateByUrl('/auth/login');
   }
 
   async onLoginRedirect() {
-    await this.router.navigateByUrl('/login');
+    await this.router.navigateByUrl('/auth/login');
   }
 }

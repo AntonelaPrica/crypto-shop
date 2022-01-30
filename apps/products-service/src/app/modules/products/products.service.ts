@@ -20,7 +20,9 @@ export class ProductsService {
   }
 
   async save(product: ProductDTO): Promise<ProductDTO> {
-    const oldProduct = await this.productEntityRepo.findOne(product.id);
+    const oldProduct = product.id
+      ? await this.productEntityRepo.findOne(product.id)
+      : null;
     const newProduct = new ProductEntity(
       oldProduct?.id,
       product.name,

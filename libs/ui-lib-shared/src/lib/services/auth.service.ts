@@ -29,4 +29,8 @@ export class AuthService {
   getProfile(): Promise<UserDTO> {
     return firstValueFrom(this.httpClient.get<UserDTO>('/api/auth/profile'));
   }
+
+  logout() {
+    return firstValueFrom(this.httpClient.get('/api/logout'));
+  }
 }
