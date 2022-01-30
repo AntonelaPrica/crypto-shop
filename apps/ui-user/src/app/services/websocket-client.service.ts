@@ -6,6 +6,7 @@ import { ProductDTO } from '@crypto-shop/services-shared';
 @Injectable({ providedIn: 'root' })
 export class WebsocketClientService {
   onProductChange: ReplaySubject<ProductDTO> = new ReplaySubject<ProductDTO>();
+  onProductDelete: ReplaySubject<string> = new ReplaySubject<string>();
 
   constructor() {}
 
@@ -16,6 +17,10 @@ export class WebsocketClientService {
     });
     socket.on('products-save', (payload) => {
       this.onProductChange.next(payload);
+    });
+
+    socket.on('products-remove', (payload) => {
+      this.onProductDelete.next(payload);
     });
   }
 }

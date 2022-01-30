@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ProductEntity } from './product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -35,6 +35,7 @@ export class ProductsService {
   }
 
   async remove(id: string): Promise<void> {
+    Logger.log('remove ' + id);
     await this.productEntityRepo.delete(id);
   }
 }

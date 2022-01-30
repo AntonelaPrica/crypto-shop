@@ -36,9 +36,7 @@ export class ProductsGatewayService {
   }
 
   async remove(id: string): Promise<void> {
-    await firstValueFrom(
-      this.client.send({ cmd: ProductsServiceCommands.DELETE_PRODUCT }, id)
-    );
+    await this.client.send({ cmd: ProductsServiceCommands.DELETE_PRODUCT }, id);
     this.websocketGateway.emit('products-remove', id);
   }
 }

@@ -10,9 +10,17 @@ import {
   UiLibSharedModule,
 } from '@crypto-shop/ui-lib-shared';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { ProductPageComponent } from './components/product-page/product-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, HomePageHostComponent],
+  declarations: [
+    AppComponent,
+    HomePageHostComponent,
+    PageHeaderComponent,
+    ProductPageComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -30,9 +38,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
           component: HomePageHostComponent,
           canActivate: [JwtAuthGuard],
         },
+        {
+          path: 'product',
+          component: ProductPageComponent,
+          canActivate: [JwtAuthGuard],
+        },
       ],
       { initialNavigation: 'enabledBlocking' }
     ),
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },

@@ -18,7 +18,7 @@ export class ProductEntity {
   @Column({
     type: 'enum',
     enum: SupportedCurrency,
-    default: SupportedCurrency.USD,
+    default: SupportedCurrency.ADA,
   })
   currency: string;
 

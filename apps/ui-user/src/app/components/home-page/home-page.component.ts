@@ -11,6 +11,7 @@ import { CryptoPriceService } from '../../services/crypto-price.service';
 export class HomePageComponent implements OnInit {
   products: ProductDTO[] = [];
   priceInUSD: number = 0;
+  popup: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -24,13 +25,14 @@ export class HomePageComponent implements OnInit {
     this.productService.onProductsChange.subscribe(
       (products) => (this.products = products)
     );
+    this.productService.onProductDelete.subscribe(
+      (products) => (this.products = products)
+    );
   }
 
   async convertToUSD(currency: string, basePrice: number) {
     const cryptoPrice = await this.cryptoPriceService.getCryptoPrice(currency);
-    console.log(cryptoPrice);
-    console.log(basePrice);
-    console.log(cryptoPrice.price * basePrice);
     this.priceInUSD = cryptoPrice.price * basePrice;
+    this.popup = true;
   }
 }

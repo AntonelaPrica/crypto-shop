@@ -10,6 +10,9 @@ export class ProductService {
   onProductsChange: ReplaySubject<ProductDTO[]> = new ReplaySubject<
     ProductDTO[]
   >();
+  onProductDelete: ReplaySubject<ProductDTO[]> = new ReplaySubject<
+    ProductDTO[]
+  >();
 
   constructor(
     private httpClient: HttpClient,
@@ -30,6 +33,11 @@ export class ProductService {
       this._products = this._products.filter((p) => p.id !== product.id);
       this._products = this._products.concat([product]);
       this.onProductsChange.next(this._products);
+    });
+
+    this.websocketClientService.onProductDelete.subscribe((id) => {
+      this._products = this._products.filter((p) => p.id !== id);
+      this.onProductDelete.next(this._products);
     });
   }
 }
