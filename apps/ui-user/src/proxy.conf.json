@@ -2,6 +2,13 @@
   "/api": {
     "target": "http://localhost:3333",
     "secure": false,
-    "changeOrigin": true
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/socket.io": {
+    "target": "http://localhost:3001/socket.io/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

@@ -6,10 +6,14 @@ import {
 } from '@crypto-shop/services-shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import { WebsocketGateway } from '../shared/websocket.gateway';
 
 @Injectable()
 export class ProductsGatewayService {
-  constructor(@Inject(PRODUCTS_SERVICE_NAME) private client: ClientProxy) {}
+  constructor(
+    @Inject(PRODUCTS_SERVICE_NAME) private client: ClientProxy,
+    private websocketGateway: WebsocketGateway
+  ) {}
 
   async findById(id: string): Promise<ProductDTO> {
     return firstValueFrom(
@@ -24,14 +28,17 @@ export class ProductsGatewayService {
   }
 
   async save(product: ProductDTO): Promise<ProductDTO> {
-    return firstValueFrom(
+    const savedProductDto = await firstValueFrom(
       this.client.send({ cmd: ProductsServiceCommands.SAVE_PRODUCT }, product)
     );
+    this.websocketGateway.emit('products-save', savedProductDto);
+    return savedProductDto;
   }
 
   async remove(id: string): Promise<void> {
-    return firstValueFrom(
+    await firstValueFrom(
       this.client.send({ cmd: ProductsServiceCommands.DELETE_PRODUCT }, id)
     );
+    this.websocketGateway.emit('products-remove', id);
   }
 }

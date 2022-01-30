@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductDTO } from '@crypto-shop/services-shared';
 import { ProductService } from '../../services/products.service';
-import { Observable } from 'rxjs';
+import { CryptoPriceService } from '../../services/crypto-price.service';
 
 @Component({
   selector: 'crypto-shop-home-page',
@@ -9,11 +9,28 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  products$: Observable<ProductDTO[]> | undefined;
+  products: ProductDTO[] = [];
+  priceInUSD: number = 0;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cryptoPriceService: CryptoPriceService
+  ) {}
 
   ngOnInit() {
-    this.products$ = this.productService.getAllProducts();
+    this.productService
+      .getAllProducts()
+      .subscribe((products) => (this.products = products));
+    this.productService.onProductsChange.subscribe(
+      (products) => (this.products = products)
+    );
+  }
+
+  async convertToUSD(currency: string, basePrice: number) {
+    const cryptoPrice = await this.cryptoPriceService.getCryptoPrice(currency);
+    console.log(cryptoPrice);
+    console.log(basePrice);
+    console.log(cryptoPrice.price * basePrice);
+    this.priceInUSD = cryptoPrice.price * basePrice;
   }
 }

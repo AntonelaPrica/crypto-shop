@@ -9,11 +9,13 @@ import {
 import { ProductsRestController } from './products-rest.controller';
 import { ProductsGatewayService } from './products-gateway.service';
 import { AuthModule } from '../auth/auth.module';
+import { SharedModule } from '../shared/shared.module';
 
 @Module({
   imports: [
     UsersModule,
     AuthModule,
+    SharedModule,
     ClientsModule.register([
       {
         name: PRODUCTS_SERVICE_NAME,

@@ -5,8 +5,8 @@ import {
   USERS_SERVICE_NAME,
   USERS_SERVICE_QUEUE,
 } from '@crypto-shop/services-shared';
-import { UsersRestController } from '../users/users-rest.controller';
 import { UsersGatewayService } from './users-gateway.service';
+import { WebsocketGateway } from './websocket.gateway';
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { UsersGatewayService } from './users-gateway.service';
     ]),
   ],
   controllers: [],
-  providers: [UsersGatewayService],
-  exports: [UsersGatewayService],
+  providers: [UsersGatewayService, WebsocketGateway],
+  exports: [UsersGatewayService, WebsocketGateway],
 })
 export class SharedModule {}
