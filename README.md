@@ -39,3 +39,13 @@ The next thing will be to install all the dependencies of the project.
 cd ./crypto-shop
 npm install
 ```
+
+Run servers in the following order:
+
+```sh
+nx serve --project=products-service
+nx serve --project=users-service
+nx serve --project=api-gateway
+nx serve --project=ui-user
+nx serve --project=ui-admin
+```
